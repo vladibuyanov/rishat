@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Buy Item</title>
+    <title>Buy {{ item.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+          rel="stylesheet"
+          crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <form method="POST">
-                {% csrf_token %}
-                {% if items %}
-                    {% for item in items %}
-                    <h1>{{ item.name }}</h1>
-                    <p>{{ item.description }}</p>
-                    <p>{{ item.price }}</p>
-                    <button id="buy-button" type="submit">Buy</button>
-                    {% endfor %}
-                {% endif %}
-        </form>
-    </div>
-
+    <form method="POST" style="display: flex; justify-content: center; margin: 250px 200px;
+        flex-direction: column; align-items: center;">
+        {% csrf_token %}
+        <h1>{{ item.name }}</h1>
+        <p>{{ item.description }}</p>
+        <p>{{ item.price }}</p>
+        <button id="buy-button" type="submit">Buy</button>
+    </form>
 <script type="text/javascript">
     var stripe = Stripe('pk_test_a9nwZVa5O7b0xz3lxl318KSU00x1L9ZWsF');
     var buyButton = document.getElementById(buy-button');

@@ -22,18 +22,23 @@ class ItemViews(GenericViewSet):
     def list(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         if pk:
-            items = self.queryset.objects.filter(id=pk)
-            content = {'serializer': self.serializer_class, 'items': items}
-            return Response(content)
+            item = self.queryset.objects.filter(id=pk)[0]
+            if item:
+                content = {'serializer': self.serializer_class, 'item': item}
+                return Response(content)
+            return Response({'data': "Не существует"})
         return Response({'data': "Метод не разрешен"})
 
     def post(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         data_request = requests.get(f'https://rishatvb.herokuapp.com/api/buy/{pk}/').json()
-        name = data_request['name']
-        price = data_request['price']
-        session = create_checkout_session(name, price, pk)
-        return redirect(session.url, code=303)
+        # data_request = requests.get(f'http://127.0.0.1:8000/api/buy/{pk}').json()
+        if data_request:
+            name = data_request['name']
+            price = data_request['price']
+            session = create_checkout_session(name, price, pk)
+            return redirect(session.url, code=303)
+        return Response({'data': "Не существует"})
 
 
 class BuyViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
