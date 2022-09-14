@@ -29,7 +29,7 @@ class ItemViews(GenericViewSet):
 
     def post(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        data_request = requests.get(f'http://127.0.0.1:8000/api/buy/{pk}').json()
+        data_request = requests.get(f'https://rishatvb.herokuapp.com/api/buy/{pk}/').json()
         name = data_request['name']
         price = data_request['price']
         session = create_checkout_session(name, price, pk)
