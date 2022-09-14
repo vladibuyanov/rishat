@@ -1,7 +1,7 @@
+import os
 import stripe
 
-stripe.api_key = 'sk_test_51LhXWLAH1MlYWwwsLCU5zqtPe5jjGlXcS65BccGaxRP' \
-                 'v0xPoF22QHYbqVRddBVBF9YAbk4JzAuDECIVY8KdlmjQk00DQIU90nN'
+stripe.api_key = os.environ.get('stripe')
 
 
 def create_checkout_session(name, price, pk):
