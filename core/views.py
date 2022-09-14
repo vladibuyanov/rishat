@@ -1,5 +1,6 @@
 import requests
-from rest_framework import viewsets
+from rest_framework.mixins import RetrieveModelMixin, ListModelMixin
+from rest_framework.viewsets import ViewSet, ModelViewSet, GenericViewSet
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 
@@ -8,7 +9,7 @@ from .models import Item
 from .serializer import ItemSerializer
 
 
-class ItemViews(viewsets.ViewSet):
+class ItemViews(GenericViewSet):
     queryset = Item
     serializer_class = ItemSerializer
 
@@ -29,12 +30,14 @@ class ItemViews(viewsets.ViewSet):
         return Response({'data': data_request})
 
 
-class BuyViews(viewsets.ModelViewSet):
+class BuyViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
+    queryset = Item
     serializer_class = ItemSerializer
 
-    def get_queryset(self):
+    def list(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         if pk:
-            item = Item.objects.filter(id=pk)
+            item = self.queryset.objects.filter(id=pk)
+            # Возвращать session_id
             return item
-        return "Метод не разрешен"
+        return Response({'data': "метод не разрешен"})
