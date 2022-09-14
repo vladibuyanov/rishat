@@ -17,20 +17,16 @@ class ItemViews(viewsets.ViewSet):
 
     def list(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        if request.method == 'GET':
-            if pk:
-                items = self.queryset.objects.filter(id=pk)
-                content = {'serializer': self.serializer_class, 'items': items}
-                return Response(content)
-            items = self.queryset.objects.all()
+        if pk:
+            items = self.queryset.objects.filter(id=pk)
             content = {'serializer': self.serializer_class, 'items': items}
             return Response(content)
+        return Response({'data': "Метод не разрешен"})
 
     def post(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
-        if request.method == 'POST' and pk:
-            data_request = requests.get(f'http://127.0.0.1:8000/api/buy/{pk}').json()
-            return Response({'data': data_request})
+        data_request = requests.get(f'http://127.0.0.1:8000/api/buy/{pk}').json()
+        return Response({'data': data_request})
 
 
 class BuyViews(viewsets.ModelViewSet):
@@ -41,5 +37,4 @@ class BuyViews(viewsets.ModelViewSet):
         if pk:
             item = Item.objects.filter(id=pk)
             return item
-        items = Item.objects.all()
-        return items
+        return "Метод не разрешен"
