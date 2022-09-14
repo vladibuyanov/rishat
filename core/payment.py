@@ -17,7 +17,7 @@ def create_checkout_session(name, price, pk):
             'quantity': 1,
         }],
         mode='payment',
-        success_url=f'http://127.0.0.1:8000/api/item/{pk}',
-        cancel_url=f'http://127.0.0.1:8000/api/item/{pk}',
+        success_url=f'https://rishatvb.herokuapp.com/api/item/{pk}',
+        cancel_url=f'https://rishatvb.herokuapp.com/api/item/1/{pk}',
     )
     return session
