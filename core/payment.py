@@ -18,6 +18,6 @@ def create_checkout_session(name, price, pk):
         }],
         mode='payment',
         success_url=f'https://rishatvb.herokuapp.com/api/item/{pk}',
-        cancel_url=f'https://rishatvb.herokuapp.com/api/item/1/{pk}',
+        cancel_url=f'https://rishatvb.herokuapp.com/api/item/{pk}',
     )
     return session
