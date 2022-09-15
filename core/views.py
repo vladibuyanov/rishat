@@ -31,15 +31,6 @@ class ItemViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
         items = {'name': name, 'description': description, 'price': price}
         return Response(items)
 
-    def post(self, request, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        # Продакшн
-        # data_request = requests.get(f'https://rishatvb.herokuapp.com/api/buy/{pk}/').json()
-        # Для тестов
-        session_id = requests.get(f'http://127.0.0.1:8000/api/buy/{pk}').json()
-        if session_id:
-            return Response({'session_id': session_id})
-
 
 class BuyViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
     queryset = Item
