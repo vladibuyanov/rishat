@@ -27,7 +27,7 @@ class ItemViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
         item = get_object_or_404(self.queryset, id=pk)
         name = item.name
         description = item.description
-        price = item.price
+        price = item.price / 100
         items = {'name': name, 'description': description, 'price': price, 'id': pk}
         return Response(items)
 
