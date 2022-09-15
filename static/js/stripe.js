@@ -2,7 +2,8 @@ let stripe = Stripe("pk_test_51LhXWLAH1MlYWwwsWkbOqbxDWLfd6NtVBp3mljg7IiRdEnfvG6
 let buyButton = document.getElementById('buy-button');
 
 buyButton.addEventListener('click', function() {
-    fetch('https://rishatvb.herokuapp.com/api/buy/1')
+    let id = document.getElementById('id-item').innerHTML;
+    fetch('https://rishatvb.herokuapp.com/api/buy/' + id)
     .then(response => response.json())
     .then(session => stripe.redirectToCheckout({ sessionId: session }))
 });

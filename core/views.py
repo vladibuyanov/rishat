@@ -28,7 +28,7 @@ class ItemViews(RetrieveModelMixin, ListModelMixin, GenericViewSet):
         name = item.name
         description = item.description
         price = item.price
-        items = {'name': name, 'description': description, 'price': price}
+        items = {'name': name, 'description': description, 'price': price, 'id': pk}
         return Response(items)
 
 

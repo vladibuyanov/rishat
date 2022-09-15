@@ -4,7 +4,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('key')
-DEBUG = os.environ.get('debug')
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
