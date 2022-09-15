@@ -1,6 +1,8 @@
 import os
 import stripe
 
+""" Связь с сервисом оплаты """
+
 stripe.api_key = os.environ.get('stripe')
 
 

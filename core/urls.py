@@ -3,10 +3,9 @@ from .views import ItemViews, BuyViews
 from django.urls import path, include
 
 router = routers.DefaultRouter()
-router.register(r'buy', BuyViews, basename='buy')
+router.register('buy', BuyViews, basename='buy')
+router.register('item', ItemViews, basename='item')
 
 urlpatterns = [
-    path('item/', BuyViews.as_view({'get': 'list'})),
-    path('item/<int:pk>/', ItemViews.as_view({'get': 'list'})),
     path('', include(router.urls)),
 ]
