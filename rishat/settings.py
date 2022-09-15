@@ -74,7 +74,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'sk'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Bratislava'
 
